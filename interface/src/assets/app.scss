@@ -1,0 +1,127 @@
+@font-face {
+  src: url('/static/fonts/roboto/Roboto.ttf');
+  font-family: Roboto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  background: #1F253D;
+  font-family: Roboto, sans-serif;
+  user-select: none !important;
+}
+
+.ui-box {
+  background: #394165;
+  border-radius: 3px;
+  padding: 12px 10px;
+  margin: 5px;
+}
+
+.ui-label {
+  font-size: 15px;
+  margin: 6px;
+  color: white;
+}
+
+.ui-mini-label {
+  font-size: 13px;
+  margin: 3px 6px;
+  color: #a0b0cb;
+}
+
+.ui-trigger {
+  font-size: 13px;
+  background: #10A8AB;
+  margin: 0 6px;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 5px 10px;
+  &:not(.triggered) {
+    opacity: 0.7;
+  }
+  cursor: pointer;
+  transition: all .3s ease;
+  &:hover {
+    background: #12c2c5;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.ui-input {
+  border-radius: 2px;
+  font-size: 13px;
+  background: #50587C;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    opacity: 0.8;
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ui-button {
+  font-size: 15px;
+  margin: 6px;
+  background: #35ABDD;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  transition: all .3s ease;
+  &:hover:not(:disabled) {
+    background: #3bbef6;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  &:focus {
+    outline: none;
+  }
+  &.danger {
+    background: #E64C66;
+    &:hover:not(:disabled) {
+      background: #f9526f;
+    }
+  }
+  &.secondary {
+    background: #10A8AB;
+    &:hover:not(:disabled) {
+      background: #14d5d9;
+    }
+  }
+}
+
+.ui-progress {
+  background: #50587C;
+  height: 15px;
+  width: calc(100% - 12px);
+  border-radius: 3px;
+  margin: 6px;
+  overflow: hidden;
+  .ui-progress-fill {
+    background: #12A7AB;
+    transition: width .3s ease;
+    height: 100%;
+  }
+}
