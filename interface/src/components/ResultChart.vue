@@ -1,6 +1,6 @@
 <template>
     <div class="chart-container">
-        <canvas class="chart" id="chart" width="800" height="200"/>
+        <canvas class="chart" id="chart" width="800" height="208"/>
     </div>
 </template>
 
@@ -9,8 +9,8 @@
         transition: all .3s ease;
         transform-origin: 100% 100%;
         &:hover {
-            transform: scale(1.41);
-            box-shadow: 0 0 5px 0px white;
+            transform: scale(1.412);
+            box-shadow: 0 0 10px -1px #FBB150;
         }
     }
 </style>
@@ -24,7 +24,10 @@ export default {
         return {
             labels: [],
             values: [],
-            chart: null
+            chart: null,
+            cnt: 0,
+            mul: 1,
+            buffer: []
         }
     },
     mounted() {
@@ -34,7 +37,7 @@ export default {
             data: {
                 labels: this.labels,
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Текущий результат',
                     data: this.values,
                     backgroundColor: 'rgba(0, 0, 0, 0)',
                     borderColor: '#FF6384',
@@ -43,9 +46,30 @@ export default {
                 }]
             },
             options: {
-                devicePixelRatio: 1.41,
+                devicePixelRatio: 2,
                 tooltips: {
                     enabled: false
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            maxTicksLimit: 15,
+                            fontColor: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            fontColor: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    }]
+                },
+                animation: {
+                    duration: 0
+                },
+                legend: {
+                    labels: {
+                        fontColor: 'rgba(255, 255, 255, 0.7)'
+                    }
                 }
             }
         });
@@ -53,11 +77,30 @@ export default {
     },
     methods: {
         updateChart() {
-            if (this.labels.length === 1000)
-                return;
-            this.labels.push(this.labels.length);
-            this.values.push((1000 - this.values.length) + Math.random() * 100);
+            for (let i = 0; i < 10; ++i)
+                this.pushValue();
+            const mx = 1000;
+            if (this.labels.length >= mx && this.labels.length % 3 === 0) {
+                for (let i = 0; i < mx; i += 3) {
+                    let mn = this.values[i];
+                    let mx = this.values[i];
+                    for (let j = i; j < i + 3; ++j) {
+                        mn = Math.min(mn, this.values[j]);
+                        mx = Math.max(mx, this.values[j]);
+                    }
+                    this.values[i / 3] = mn;
+                    this.values[i / 3 + 1] = mx;
+                }
+                while (this.labels.length > mx / 3) {
+                    this.labels.pop();
+                    this.values.pop();
+                }
+            }
             this.chart.update();
+        },
+        pushValue() {
+            this.labels.push(++this.cnt);
+            this.values.push((1000 - this.cnt) + Math.random() * 100);
         }
     }
 }
