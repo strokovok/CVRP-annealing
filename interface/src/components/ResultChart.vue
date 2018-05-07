@@ -89,14 +89,9 @@ export default {
                 }
             }
         });
-        // window.addValuesToChart = this.pushValues;
-        let p = [];
-        for (let i = 0; i < 1000; ++i)
-            p.push({
-                x: i * 90,
-                y: 5000 / (i / 100 * 25) + Math.random() * 9000 - 4500,
-            });
-        this.updateChart(p);
+        window.updateChart = this.updateChart;
+        window.resizeBy(500, 500);
+        window.resizeTo(500, 500);
     },
     methods: {
         updateChart(points) {
@@ -110,8 +105,8 @@ export default {
                 this.chart.update();
                 return;
             }
-            for (let point of points) {
-                point.x = moment(0).add(point.x, 'milliseconds');
+            for (let parr of points) {
+                let point = { x: moment(0).add(parr[0], 'milliseconds'), y: parr[1] };
                 cp.push(point);
                 if (bp.length === 0 || bp[bp.length - 1].y > point.y)
                     bp.push(point);
