@@ -1,9 +1,4 @@
-@font-face {
-  src: url('/static/fonts/roboto/Roboto.ttf');
-  font-family: Roboto;
-  font-weight: normal;
-  font-style: normal;
-}
+@import 'roboto.scss';
 
 html {
   background: #1F253D;

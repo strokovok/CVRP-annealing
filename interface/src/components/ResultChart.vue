@@ -18,16 +18,16 @@
 <script>
 
 import Chart from 'chart.js';
+import moment from 'moment';
+
+window.moment = moment;
 
 export default {
     data() {
         return {
-            labels: [],
-            values: [],
-            chart: null,
-            cnt: 0,
-            mul: 1,
-            buffer: []
+            currentPoints: [],
+            bestPoints: [],
+            chart: null
         }
     },
     mounted() {
@@ -35,14 +35,22 @@ export default {
         this.chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: this.labels,
                 datasets: [{
+                    label: 'Лучший результат',
+                    data: this.bestPoints,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: '#4FC5F7',
+                    pointRadius: 0,
+                    borderWidth: 1,
+                    steppedLine: true
+                }, {
                     label: 'Текущий результат',
-                    data: this.values,
+                    data: this.currentPoints,
                     backgroundColor: 'rgba(0, 0, 0, 0)',
                     borderColor: '#FF6384',
                     pointRadius: 0,
                     borderWidth: 1,
+                    steppedLine: true
                 }]
             },
             options: {
@@ -52,8 +60,16 @@ export default {
                 },
                 scales: {
                     xAxes: [{
+                        type: 'time',
+                        time: {
+                            displayFormats: {
+                                'millisecond': 's.SSS[s]',
+                                'second': 'm[m] s[s]',
+                                'minute': 'h[h] m[m]',
+                                'hour': 'h[h]',
+                            }
+                        },
                         ticks: {
-                            maxTicksLimit: 15,
                             fontColor: 'rgba(255, 255, 255, 0.7)'
                         }
                     }],
@@ -73,34 +89,39 @@ export default {
                 }
             }
         });
-        setInterval(this.updateChart, 500);
+        // window.addValuesToChart = this.pushValues;
+        let p = [];
+        for (let i = 0; i < 1000; ++i)
+            p.push({
+                x: i * 90,
+                y: 5000 / (i / 100 * 25) + Math.random() * 9000 - 4500,
+            });
+        this.updateChart(p);
     },
     methods: {
-        updateChart() {
-            for (let i = 0; i < 10; ++i)
-                this.pushValue();
-            const mx = 1000;
-            if (this.labels.length >= mx && this.labels.length % 3 === 0) {
-                for (let i = 0; i < mx; i += 3) {
-                    let mn = this.values[i];
-                    let mx = this.values[i];
-                    for (let j = i; j < i + 3; ++j) {
-                        mn = Math.min(mn, this.values[j]);
-                        mx = Math.max(mx, this.values[j]);
-                    }
-                    this.values[i / 3] = mn;
-                    this.values[i / 3 + 1] = mx;
-                }
-                while (this.labels.length > mx / 3) {
-                    this.labels.pop();
-                    this.values.pop();
-                }
+        updateChart(points) {
+            let cp = this.currentPoints;
+            let bp = this.bestPoints;
+            while (cp.length > 0)
+                cp.pop();
+            while (bp.length > 0)
+                bp.pop();
+            if (points.length === 0) {
+                this.chart.update();
+                return;
             }
+            for (let point of points) {
+                point.x = moment(0).add(point.x, 'milliseconds');
+                cp.push(point);
+                if (bp.length === 0 || bp[bp.length - 1].y > point.y)
+                    bp.push(point);
+            }
+            if (cp[cp.length - 1].x > bp[bp.length - 1].x)
+                bp.push({
+                    x: cp[cp.length - 1].x,
+                    y: bp[bp.length - 1].y
+                });
             this.chart.update();
-        },
-        pushValue() {
-            this.labels.push(++this.cnt);
-            this.values.push((1000 - this.cnt) + Math.random() * 100);
         }
     }
 }
