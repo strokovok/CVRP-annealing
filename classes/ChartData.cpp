@@ -19,6 +19,7 @@ public:
 	void clear() {
 		for (int i = 0; i < MAX_LEVEL; ++i)
 			levels[i].clear();
+		size = 0;
 	}
 
 	void add_node(ll x, ll y) {

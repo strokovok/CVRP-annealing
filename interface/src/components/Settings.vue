@@ -1,11 +1,13 @@
 <template>
     <div class="settings">
         <div class="ui-label">Настройки</div>
-        <div class="setting" v-for="setting in settings" :key="setting">
-            <div class="ui-mini-label">{{setting}}</div>
-            <div class="setting-control">
-                <button class="ui-trigger">auto</button>
-                <input class="ui-input" type="number" v-model="shit">
+        <div class="settings-list">
+            <div class="setting" v-for="setting in settings" :key="setting">
+                <div class="ui-mini-label">{{setting}}</div>
+                <div class="setting-control">
+                    <button class="ui-trigger">auto</button>
+                    <input class="ui-input" type="number" v-model="shit">
+                </div>
             </div>
         </div>
     </div>
@@ -17,6 +19,15 @@
         flex-direction: column;
     }
 
+    .settings-list {
+        margin-top: 2px;
+        display: flex;
+        flex-direction: column;
+        max-height: 160px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
     .setting {
         margin-top: 5px;
         &:last-child {
@@ -26,12 +37,8 @@
 
     .setting-control {
         display: flex;
-        .ul-trigger {
-            flex-shrink: 0;
-        }
         .ui-input {
-            flex-basis: 0;
-            flex-grow: 1;
+            width: 130px;
             margin-left: 2px;
             margin-right: 6px;
         }
@@ -46,13 +53,10 @@ export default {
             settings: [
                 "Начальная температура",
                 "Конечная температура",
-                "Коэффициент уменьшения температуры",
-                "Начальное количество операций на итерацию",
-                "Конечное количество операций на итерацию",
-                "Коэффициент увеличения количества операций",
+                "Коэффициент охлаждения",
                 "Количество итераций",
-                "Мин. задержка между итерациями",
-                "Мин. задержка между перерисовками",
+                "Органичение по времени (сек)",
+                "Мин. задержка итераций (мс)",
             ]
         };
     }

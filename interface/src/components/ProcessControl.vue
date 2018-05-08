@@ -6,10 +6,6 @@
             <button class="ui-button secondary" disabled>Пауза</button>
             <button class="ui-button danger" disabled>Стоп</button>
         </div>
-        <div class="ui-mini-label">Выполняется (50%)</div>
-        <div class="ui-progress">
-            <div class="ui-progress-fill"/>
-        </div>
     </div>
 </template>
 
@@ -21,10 +17,7 @@
     }
 
     .buttons {
+        flex-shrink: 0;
         display: flex;
-    }
-
-    .ui-progress-fill {
-        width: 50%;
     }
 </style>

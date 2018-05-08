@@ -14,6 +14,7 @@
         color: transparentize(white, 0.1);
         font-size: 13px;
         padding: 3px !important;
+        min-width: 240px;
     }
 
     .stat {

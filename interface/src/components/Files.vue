@@ -2,9 +2,10 @@
     <div class="files">
         <div class="ui-label">Проверка файла</div>
         <div class="buttons">
-            <button class="ui-button">Загрузить</button>
-            <button class="ui-button" disabled>Сохранить</button>
-            <button class="ui-button danger" disabled>Сброс</button>
+            <button class="ui-button">Загрузить задачу</button>
+            <button class="ui-button">Загрузить решение</button>
+            <button class="ui-button secondary">Сохранить решение</button>
+            <button class="ui-button danger">Сброс решения</button>
         </div>
     </div>
 </template>

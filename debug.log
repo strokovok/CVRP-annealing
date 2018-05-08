@@ -28,3 +28,6 @@
 [0507/125611.192:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
 [0507/135012.668:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
 [0507/135209.106:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0507/153032.862:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0507/155243.139:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0508/133955.985:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain

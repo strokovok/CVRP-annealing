@@ -8,6 +8,8 @@ if not hasattr(sys, 'argv'):
     sys.argv  = ['']
 
 browser = None
+# events = queue.Queue()
+# last_event = None
 
 def run_browser():
     sys.excepthook = cef.ExceptHook
@@ -25,8 +27,3 @@ def run_browser_async():
 
 def execute_js_func(func, arg):
     browser.ExecuteFunction(func, arg)
-
-def do_shit(vals):
-	# print(vals)
-	browser.ExecuteFunction("addValuesToChart", vals)
-	# browser.ExecuteJavascript("addValueToChart({})".format(x));

@@ -1,17 +1,17 @@
 <template>
     <div class="chart-container">
-        <canvas class="chart" id="chart" width="800" height="208"/>
+        <canvas class="chart" id="chart" width="750" height="220"/>
     </div>
 </template>
 
 <style lang="scss" scoped>
     .chart-container {
         transition: all .3s ease;
-        transform-origin: 100% 100%;
-        &:hover {
-            transform: scale(1.412);
-            box-shadow: 0 0 10px -1px #FBB150;
-        }
+        transform-origin: 50% 100%;
+        /*<!--&:hover {-->*/
+            /*<!--transform: scale(1.3);-->*/
+            /*<!--box-shadow: 0 0 10px -1px #FBB150;-->*/
+        /*<!--}-->*/
     }
 </style>
 
