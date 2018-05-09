@@ -13,7 +13,10 @@
             <result-chart class="ui-box"/>
             <cars-info class="ui-box"/>
             <div class="page-row" style="align-items: flex-start">
-                <routes class="ui-box"/>
+                <div class="page-column">
+                    <display-mode class="ui-box"/>
+                    <routes class="ui-box"/>
+                </div>
                 <graph class="ui-box" style="margin-bottom: 100px"/>
             </div>
         </div>
@@ -48,6 +51,7 @@ import Graph from './components/Graph.vue';
 import Progress from './components/Progress.vue';
 import Routes from './components/Routes.vue';
 import CarsInfo from './components/CarsInfo.vue';
+import DisplayMode from './components/DisplayMode.vue';
 
 export default {
     components: {
@@ -59,7 +63,8 @@ export default {
         Graph,
         'progress-view': Progress,
         Routes,
-        CarsInfo
+        CarsInfo,
+        DisplayMode
     }
 };
 </script>

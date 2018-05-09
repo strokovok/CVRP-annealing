@@ -26,6 +26,7 @@ html {
 }
 
 .ui-trigger {
+  text-align: center;
   font-size: 13px;
   background: #10A8AB;
   margin: 0 6px;
@@ -46,6 +47,10 @@ html {
   }
   &:focus {
     outline: none;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 
