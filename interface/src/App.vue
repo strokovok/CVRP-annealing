@@ -59,9 +59,11 @@ window.stateEnum = {
     INCORRECT_PROBLEM: 'INCORRECT_PROBLEM',
     PROBLEM_READY: 'PROBLEM_READY',
     SOLVING: 'SOLVING',
+    PAUSED: 'PAUSED',
     SOLUTION_LOADING: 'SOLUTION_LOADING',
     INCORRECT_SOLUTION: 'INCORRECT_SOLUTION',
-    SOLUTION_VIEW: 'SOLUTION_VIEW'
+    SOLUTION_VIEW: 'SOLUTION_VIEW',
+    SOLUTION_SAVING: 'SOLUTION_SAVING',
 };
 
 window.settingsEnum = {
@@ -99,8 +101,30 @@ export default {
     },
     created() {
         window.globalStore = this.store;
+        window.handleAppEvent = this.handleAppEvent;
     },
     methods: {
+        handleAppEvent(arg) {
+            let newState = arg.newState;
+            let update = arg.update;
+            if (newState)
+                this.store.state = newState;
+            if (update) {
+                for (let arrName of ['cars', 'routes', 'graph'])
+                    if (update.hasOwnProperty(arrName)) {
+                        while (this.store[arrName].length > 0)
+                            this.store[arrName].pop();
+                        for (let item of update[arrName])
+                            this.store[arrName].push(item);
+                    }
+                if (update.hasOwnProperty('averageOpTime'))
+                    this.store.averageOpTime = update.averageOpTime;
+                if (update.hasOwnProperty('stats'))
+                    for (let stat in update.stats)
+                        this.store.stats[stat] = update.stats[stat];
+            }
+            window.eventBus.$emit('redraw');
+        }
     },
     components: {
         Files,

@@ -36,7 +36,7 @@ export default {
         canvas.style.width = canvas.style.height = '375px';
         canvas.getContext('2d').scale(2, 2);
         this.updateRandomly();
-        setInterval(this.updateRoutesRandomly, 1000);
+        // setInterval(this.updateRoutesRandomly, 1000);
     },
     methods: {
         updateRandomly() {

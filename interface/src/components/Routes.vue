@@ -69,7 +69,7 @@ export default {
         }
     },
     mounted() {
-        setInterval(this.updateRandomly, 1000);
+        // setInterval(this.updateRandomly, 1000);
     },
     methods: {
         updateRandomly() {
