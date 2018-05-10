@@ -1,8 +1,8 @@
 <template>
     <div class="stats">
-        <div class="stat" v-for="(statVal, statName) in stats" :key="statName">
-            <div class="stat-name">{{statName}}</div>
-            <div class="stat-value">{{statVal}}</div>
+        <div class="stat" v-for="stat in stats" :key="stat.key">
+            <div class="stat-name">{{stat.label}}</div>
+            <div class="stat-value">{{statsVals[stat.key]}}{{statsVals[stat.key] != '-' ? stat.prefix : ''}}</div>
         </div>
     </div>
 </template>
@@ -37,13 +37,52 @@
 export default {
     data() {
         return {
-            stats: {
-                'Примерное время': '25c',
-                'Времени прошло': '10c',
-                'Итерации': '1232343',
-                'Температура': '5555',
-                'Лучший результат': '14'
+            stats: [{
+                label: 'Примерное время',
+                key: statsEnum.ESTIMATED_TIME,
+                prefix: 'с'
+            }, {
+                label: 'Времени прошло',
+                key: statsEnum.TIME_PASSED,
+                prefix: ''
+            }, {
+                label: 'Итерации',
+                key: statsEnum.ITERATIONS,
+                prefix: ''
+            }, {
+                label: 'Температура',
+                key: statsEnum.TEMPERATURE,
+                prefix: ''
+            }, {
+                label: 'Лучший результат',
+                key: statsEnum.BEST_RESULT,
+                prefix: ''
+            }]
+        }
+    },
+    computed: {
+        statsVals() {
+            let res = JSON.parse(JSON.stringify(globalStore.stats));
+            if ([
+                stateEnum.EMPTY,
+                stateEnum.PROBLEM_LOADING,
+                stateEnum.INCORRECT_PROBLEM,
+                stateEnum.PROBLEM_READY,
+                stateEnum.SOLUTION_LOADING,
+                stateEnum.INCORRECT_SOLUTION
+            ].includes(globalStore.state)) {
+                res[statsEnum.TIME_PASSED] = "-";
+                res[statsEnum.ITERATIONS] = "-";
+                res[statsEnum.TEMPERATURE] = "-";
+                res[statsEnum.BEST_RESULT] = "-";
             }
+            if (![
+                stateEnum.PROBLEM_READY,
+                stateEnum.INCORRECT_SOLUTION,
+                stateEnum.SOLUTION_VIEW,
+            ].includes(globalStore.state))
+                res[statsEnum.ESTIMATED_TIME] = "-";
+            return res;
         }
     }
 }

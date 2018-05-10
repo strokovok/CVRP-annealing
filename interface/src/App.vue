@@ -96,7 +96,7 @@ export default {
                 currentRoutes: [],
                 bestRoutes: [],
                 graph: [],
-                averageOpTime: 1,
+                averageOpTime: 1 / 50,
                 tStartRecommended: 5000,
                 showOnlyBest: false
             }

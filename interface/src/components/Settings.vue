@@ -6,12 +6,13 @@
                 <div class="ui-mini-label">{{setting.label}}</div>
                 <div class="setting-control">
                     <button class="ui-trigger"
+                            :disabled="allDisabled"
                             :class="[{'triggered': setting.auto}]"
                             @click="changeAuto(setting.key)">
                         auto
                     </button>
                     <input class="ui-input"
-                           :disabled="setting.auto"
+                           :disabled="setting.auto || allDisabled"
                            type="number"
                            @keydown="inputUpdate"
                            v-model="settingsModel[setting.key]">
@@ -89,10 +90,17 @@ export default {
         };
     },
     created() {
-        window.globalStore.settings[settingsEnum.ITERATIONS] = 1000000000;
-        this.calcAuto();
+        window.globalStore.settings[settingsEnum.ITERATIONS] = 1000000;
+        this.validateSettings();
     },
     computed: {
+        allDisabled() {
+            return ![
+                stateEnum.PROBLEM_READY,
+                stateEnum.INCORRECT_SOLUTION,
+                stateEnum.SOLUTION_VIEW,
+            ].includes(globalStore.state);
+        },
         settingsModel() {
             return window.globalStore.settings;
         }
@@ -132,7 +140,7 @@ export default {
                 globalStore.settings[mindelay.key] = 0;
 
             if (its.auto && (tStart.auto || tEnd.auto || tCooling.auto))
-                globalStore.settings[its.key] = 1000000000;
+                globalStore.settings[its.key] = 1000000;
             if (tEnd.auto && (tStart.auto || tCooling.auto))
                 globalStore.settings[tEnd.key] = 0.1;
             if (tStart.auto && tCooling.auto)
@@ -166,6 +174,8 @@ export default {
                 let cool = Math.pow(start / end, -1 / val);
                 globalStore.settings[tCooling.key] = cool;
             }
+            let t = Math.floor(globalStore.settings[its.key] * globalStore.averageOpTime / 1000);
+            this.$set(globalStore.stats, statsEnum.ESTIMATED_TIME, t);
         },
         validateSetting(setting, min, max, normal) {
             let val = globalStore.settings[setting];
@@ -179,7 +189,7 @@ export default {
             this.validateSetting(settingsEnum.T_START, 10, 1e10, globalStore.tStartRecommended);
             this.validateSetting(settingsEnum.T_END, 0.1, globalStore.settings[settingsEnum.T_START] - 1, 0.1);
             this.validateSetting(settingsEnum.T_COOLING, 0.1, 0.9999, 0.9998);
-            this.validateSetting(settingsEnum.ITERATIONS, 1, 1000000000000, 1000000000);
+            this.validateSetting(settingsEnum.ITERATIONS, 1, 1000000000000, 1000000);
             this.validateSetting(settingsEnum.TIME_LIMIT, 3, 1000000000000, 60);
             this.validateSetting(settingsEnum.MIN_ITERATION_DELAY, 0, 10000, 0);
             this.calcAuto();
