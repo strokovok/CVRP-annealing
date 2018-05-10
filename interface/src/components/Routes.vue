@@ -13,24 +13,12 @@
                 </div>
             </div>
         </div>
-        <!--<transition-group name="vertex" tag="div" class="routes-list">-->
-            <!--<div class="route" key="shit">-->
-                <!--<div v-for="vertex in route1" :key="vertex" class="vertex">-->
-                    <!--{{vertex}}-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="route" key="shit2">-->
-                <!--<div v-for="vertex in route2" :key="vertex" class="vertex">-->
-                    <!--{{vertex}}-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</transition-group>-->
     </div>
 </template>
 
 <style lang="scss" scoped>
     .routes {
-        width: 320px;
+        width: 315px;
     }
 
     .content {
