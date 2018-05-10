@@ -35,6 +35,15 @@ public:
 		return call("extract_event", PyTuple_New(0));
 	}
 
+	static void sendAppEvent(string newState, PyObject *update) {
+		PyObject *event = PyDict_New();
+		if (newState != "")
+			PyDict_SetItemString(event, "newState", PyUnicode_FromString(newState.c_str()));
+		if (update != nullptr)
+			PyDict_SetItemString(event, "update", update);
+		call("sendAppEvent", PyTuple_Pack(1, event));
+	}
+
 	// static void update_chart(ChartData *chart) {
 	// 	auto state = PyGILState_Ensure();
 	// 	vector <pair <ll, ll> > data = chart->get_points();

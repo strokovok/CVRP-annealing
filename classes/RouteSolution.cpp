@@ -20,6 +20,11 @@ public:
 	vector <Route*> routes;
 	double cost;
 
+	~RouteSolution() {
+		for (auto &route : routes)
+			delete route;
+	}
+
 	RouteSolution(GraphData *graph): graph(graph) {
 		routes.push_back(new Route(graph->c));
 		for (int i = 1; i < graph->n; ++i) {

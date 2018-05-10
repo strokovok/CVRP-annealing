@@ -47,7 +47,7 @@ export default {
                 window.requestSolutionSaving();
         },
         resetSolution() {
-            window.handleAppEvent({ event: eventsEnum.SOLUTION_RESET });
+            window.handleAppEvent({ newState: stateEnum.PROBLEM_READY });
         }
     },
     computed: {

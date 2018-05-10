@@ -2,6 +2,7 @@
 #include <chrono>
 #include <thread>
 #include <ctime>
+#include <cmath>
 #include <cstdlib>
 #include "classes/AdvancedTimer.cpp"
 #include "classes/GraphData.cpp"
@@ -53,6 +54,22 @@ int main() {
 				string event_type(PyUnicode_AsUTF8(PyDict_GetItemString(event, "type")));
 				if (event_type == "PROBLEM_LOADING") {
 					graph = new GraphData(PyDict_GetItemString(event, "problem"));
+					AdvancedTimer opTimer;
+					opTimer.run();
+					RouteSolution *cur = new RouteSolution(graph);
+					double badCost = cur->cost * 2;
+					for (int i = 0; i < 10000; ++i) {
+						RouteSolution *prev = new RouteSolution(cur);
+						delete cur;
+						cur = prev;
+					}
+					delete cur;
+					double avg = opTimer.value() / double(10000);
+					double tStart = -badCost / log(0.5);
+					PyObject *update = PyDict_New();
+					PyDict_SetItemString(update, "averageOpTime", PyFloat_FromDouble(avg));
+					PyDict_SetItemString(update, "tStartRecommended", PyFloat_FromDouble(tStart));
+					InterfaceGate::sendAppEvent("PROBLEM_READY", update);
 				}
 			}
 			InterfaceGate::pyunlock();

@@ -54,8 +54,8 @@ def run_browser():
     cef.Shutdown()
 
 def run_browser_async():
-	t = threading.Thread(target=run_browser)
-	t.start()
+    t = threading.Thread(target=run_browser)
+    t.start()
 
 def sendAppEvent(event):
-	browser.ExecuteFunction('handleAppEvent', event)
+    browser.ExecuteFunction('handleAppEvent', event)
