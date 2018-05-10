@@ -91,10 +91,13 @@ export default {
                 state: stateEnum.EMPTY,
                 settings: {},
                 stats: {},
-                cars: [],
-                routes: [],
+                currentCars: [],
+                bestCars: [],
+                currentRoutes: [],
+                bestRoutes: [],
                 graph: [],
                 averageOpTime: 1,
+                tStartRecommended: 5000,
                 showOnlyBest: false
             }
         }
@@ -110,7 +113,7 @@ export default {
             if (newState)
                 this.store.state = newState;
             if (update) {
-                for (let arrName of ['cars', 'routes', 'graph'])
+                for (let arrName of ['cars', 'currentRoutes', 'bestRoutes', 'graph'])
                     if (update.hasOwnProperty(arrName)) {
                         while (this.store[arrName].length > 0)
                             this.store[arrName].pop();

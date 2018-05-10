@@ -86,7 +86,12 @@ export default {
         drawRoutes(ctx) {
             let edgeColors = ["#10A8AB", "#3469AF", "#4DBFF1", "#E64C66", "#FBB150"];
             let color = 0;
-            for (let route of window.globalStore.routes) {
+            let routes;
+            if (window.globalStore.showOnlyBest)
+                routes = window.globalStore.bestRoutes;
+            else
+                routes = window.globalStore.currentRoutes;
+            for (let route of routes) {
                 color = (color + 1) % edgeColors.length;
                 ctx.strokeStyle = edgeColors[color];
                 let edges = [];

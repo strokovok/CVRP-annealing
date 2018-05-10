@@ -70,6 +70,7 @@ int main() {
 					PyDict_SetItemString(update, "averageOpTime", PyFloat_FromDouble(avg));
 					PyDict_SetItemString(update, "tStartRecommended", PyFloat_FromDouble(tStart));
 					InterfaceGate::sendAppEvent("PROBLEM_READY", update);
+					state = Ready;
 				}
 			}
 			InterfaceGate::pyunlock();
