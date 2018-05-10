@@ -80,6 +80,8 @@ export default {
                 stateEnum.PROBLEM_READY,
                 stateEnum.INCORRECT_SOLUTION,
                 stateEnum.SOLUTION_VIEW,
+                stateEnum.SOLVING,
+                stateEnum.PAUSED,
             ].includes(globalStore.state))
                 res[statsEnum.ESTIMATED_TIME] = "-";
             return res;
