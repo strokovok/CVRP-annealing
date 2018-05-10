@@ -63,7 +63,7 @@ window.stateEnum = {
     SOLUTION_LOADING: 'SOLUTION_LOADING',
     INCORRECT_SOLUTION: 'INCORRECT_SOLUTION',
     SOLUTION_VIEW: 'SOLUTION_VIEW',
-    SOLUTION_SAVING: 'SOLUTION_SAVING',
+    SOLUTION_SAVING: 'SOLUTION_SAVING'
 };
 
 window.settingsEnum = {
@@ -104,9 +104,9 @@ export default {
         window.handleAppEvent = this.handleAppEvent;
     },
     methods: {
-        handleAppEvent(arg) {
-            let newState = arg.newState;
-            let update = arg.update;
+        handleAppEvent(event) {
+            let newState = event.newState;
+            let update = event.update;
             if (newState)
                 this.store.state = newState;
             if (update) {

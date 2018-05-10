@@ -1,0 +1,94 @@
+
+[2018-05-10 06:12:49] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 18, in load_problem
+    file_path = filedialog.askopenfilename()
+  File "C:\Soft\Python36\Lib\tkinter\filedialog.py", line 375, in askopenfilename
+    return Open(**options).show()
+  File "C:\Soft\Python36\Lib\tkinter\commondialog.py", line 39, in show
+    w = Frame(self.master)
+  File "C:\Soft\Python36\Lib\tkinter\__init__.py", line 2741, in __init__
+    Widget.__init__(self, master, 'frame', cnf, {}, extra)
+  File "C:\Soft\Python36\Lib\tkinter\__init__.py", line 2296, in __init__
+    (widgetName, self._w) + extra + self._options(cnf))
+RuntimeError: main thread is not in main loop
+
+
+[2018-05-10 06:14:53] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 19, in load_problem
+    filedialog.askopenfilename()
+  File "C:\Soft\Python36\Lib\tkinter\filedialog.py", line 375, in askopenfilename
+    return Open(**options).show()
+  File "C:\Soft\Python36\Lib\tkinter\commondialog.py", line 39, in show
+    w = Frame(self.master)
+  File "C:\Soft\Python36\Lib\tkinter\__init__.py", line 2741, in __init__
+    Widget.__init__(self, master, 'frame', cnf, {}, extra)
+  File "C:\Soft\Python36\Lib\tkinter\__init__.py", line 2296, in __init__
+    (widgetName, self._w) + extra + self._options(cnf))
+RuntimeError: main thread is not in main loop
+
+
+[2018-05-10 06:15:01] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 19, in load_problem
+    filedialog.askopenfilename()
+  File "C:\Soft\Python36\Lib\tkinter\filedialog.py", line 375, in askopenfilename
+    return Open(**options).show()
+  File "C:\Soft\Python36\Lib\tkinter\commondialog.py", line 39, in show
+    w = Frame(self.master)
+  File "C:\Soft\Python36\Lib\tkinter\__init__.py", line 2741, in __init__
+    Widget.__init__(self, master, 'frame', cnf, {}, extra)
+  File "C:\Soft\Python36\Lib\tkinter\__init__.py", line 2296, in __init__
+    (widgetName, self._w) + extra + self._options(cnf))
+RuntimeError: main thread is not in main loop
+
+
+[2018-05-10 07:13:33] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 18, in load_problem
+    dialog = wx.FileDialog(None, 'Open', style=(wx.FD_OPEN | wx.FD_FILE_MUST_EXIST))
+wx._core.PyNoAppError: The wx.App object must be created first!
+
+
+[2018-05-10 07:13:39] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 18, in load_problem
+    dialog = wx.FileDialog(None, 'Open', style=(wx.FD_OPEN | wx.FD_FILE_MUST_EXIST))
+wx._core.PyNoAppError: The wx.App object must be created first!
+
+
+[2018-05-10 07:14:10] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 17, in load_problem
+    dialog = wx.FileDialog(None, 'Open', style=(wx.FD_OPEN | wx.FD_FILE_MUST_EXIST))
+wx._core.PyNoAppError: The wx.App object must be created first!
+
+
+[2018-05-10 07:14:17] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 17, in load_problem
+    dialog = wx.FileDialog(None, 'Open', style=(wx.FD_OPEN | wx.FD_FILE_MUST_EXIST))
+wx._core.PyNoAppError: The wx.App object must be created first!
+
+
+[2018-05-10 11:02:44] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 29, in load_problem
+    graph: problem['v']
+NameError: name 'graph' is not defined
+
+
+[2018-05-10 11:03:13] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 29, in load_problem
+    graph: problem['v']
+NameError: name 'graph' is not defined
+
+
+[2018-05-10 11:03:23] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 29, in load_problem
+    graph: problem['v']
+NameError: name 'graph' is not defined
+
