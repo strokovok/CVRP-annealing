@@ -53,7 +53,55 @@ import Routes from './components/Routes.vue';
 import CarsInfo from './components/CarsInfo.vue';
 import DisplayMode from './components/DisplayMode.vue';
 
+window.stateEnum = {
+    EMPTY: 'EMPTY',
+    PROBLEM_LOADING: 'PROBLEM_LOADING',
+    INCORRECT_PROBLEM: 'INCORRECT_PROBLEM',
+    PROBLEM_READY: 'PROBLEM_READY',
+    SOLVING: 'SOLVING',
+    SOLUTION_LOADING: 'SOLUTION_LOADING',
+    INCORRECT_SOLUTION: 'INCORRECT_SOLUTION',
+    SOLUTION_VIEW: 'SOLUTION_VIEW'
+};
+
+window.settingsEnum = {
+    T_START: 'T_START',
+    T_END: 'T_END',
+    T_COOLING: 'T_COOLING',
+    ITERATIONS: 'ITERATIONS',
+    TIME_LIMIT: 'TIME_LIMIT',
+    MIN_ITERATION_DELAY: 'MIN_ITERATION_DELAY'
+};
+
+window.statsEnum = {
+    ESTIMATED_TIME: 'ESTIMATED_TIME',
+    TIME_PASSED: 'TIME_PASSED',
+    ITERATIONS: 'ITERATIONS',
+    TEMPERATURE: 'TEMPERATURE',
+    BEST_RESULT: 'BEST_RESULT',
+    PROGRESS: 'PROGRESS'
+};
+
 export default {
+    data() {
+        return {
+            store: {
+                state: stateEnum.EMPTY,
+                settings: {},
+                stats: {},
+                cars: [],
+                routes: [],
+                graph: [],
+                averageOpTime: 1,
+                showOnlyBest: false
+            }
+        }
+    },
+    created() {
+        window.globalStore = this.store;
+    },
+    methods: {
+    },
     components: {
         Files,
         Settings,
