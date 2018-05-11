@@ -1,6 +1,8 @@
 <template>
     <div class="display-mode">
-        <button class="ui-trigger">Отображать только лучший результат</button>
+        <button class="ui-trigger" :class="[{'triggered': onlyBest}]" @click="toggle">
+            Отображать только лучший результат
+        </button>
     </div>
 </template>
 
@@ -10,3 +12,18 @@
         justify-content: center;
     }
 </style>
+
+<script>
+export default {
+    methods: {
+        toggle() {
+            window.globalStore.showOnlyBest = !window.globalStore.showOnlyBest;
+        }
+    },
+    computed: {
+        onlyBest() {
+            return window.globalStore.showOnlyBest;
+        }
+    }
+}
+</script>

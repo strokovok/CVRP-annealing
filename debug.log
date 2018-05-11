@@ -103,3 +103,9 @@
 [0510/203836.060:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
 [0510/203954.992:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
 [0510/204131.050:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0511/020857.761:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0511/020925.104:ERROR:CONSOLE(5248)] "SyntaxError: Unexpected token S in JSON at position 1473798", source: chrome-devtools://devtools/inspector.js (5248)
+[0511/021146.773:ERROR:CONSOLE(5248)] "SyntaxError: Unexpected token S in JSON at position 1473798", source: chrome-devtools://devtools/inspector.js (5248)
+[0511/021411.405:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0511/021535.188:ERROR:CONSOLE(5248)] "SyntaxError: Unexpected token S in JSON at position 1473798", source: chrome-devtools://devtools/inspector.js (5248)
+[0511/023246.036:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain

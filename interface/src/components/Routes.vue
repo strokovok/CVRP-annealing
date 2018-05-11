@@ -69,18 +69,23 @@ export default {
         }
     },
     mounted() {
-        // setInterval(this.updateRandomly, 1000);
+        window.eventBus.$on('redraw', this.updateRoutes);
     },
     methods: {
-        updateRandomly() {
+        updateRoutes() {
             let routes = [];
-            for (let i = 1; i <= 6; ++i)
-                routes.push([i]);
-            for (let i = 7; i < 40; ++i)
-                routes[Math.floor(Math.random() * 6)].push(i);
-            this.updateRoutes(routes);
-        },
-        updateRoutes(routes) {
+            if ([
+                stateEnum.SOLUTION_VIEW,
+                stateEnum.SOLVING,
+                stateEnum.PAUSED,
+                stateEnum.SOLUTION_SAVING
+            ].includes(window.globalStore.state)) {
+                if (window.globalStore.showOnlyBest)
+                    routes = window.globalStore.bestRoutes;
+                else
+                    routes = window.globalStore.currentRoutes;
+            }
+
             while (this.routes.length > 0)
                 this.routes.pop();
             while (this.vertexes.length > 0)

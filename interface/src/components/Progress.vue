@@ -30,7 +30,7 @@ export default {
         progress() {
             if (this.beforeProcess)
                 return 0;
-            if (this.afterProcess())
+            if (this.afterProcess)
                 return 100;
             return globalStore.stats[statsEnum.PROGRESS] || 0;
         },

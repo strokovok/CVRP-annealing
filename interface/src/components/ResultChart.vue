@@ -89,12 +89,18 @@ export default {
                 }
             }
         });
-        window.updateChart = this.updateChart;
-        window.resizeBy(500, 500);
-        window.resizeTo(500, 500);
+        window.eventBus.$on('redraw', this.updateChart);
     },
     methods: {
-        updateChart(points) {
+        updateChart() {
+            let points = [];
+            if ([
+                stateEnum.SOLUTION_VIEW,
+                stateEnum.SOLVING,
+                stateEnum.PAUSED,
+                stateEnum.SOLUTION_SAVING
+            ].includes(window.globalStore.state))
+                points = window.globalStore.chart;
             let cp = this.currentPoints;
             let bp = this.bestPoints;
             while (cp.length > 0)

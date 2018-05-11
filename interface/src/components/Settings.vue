@@ -90,8 +90,11 @@ export default {
         };
     },
     created() {
+        for (let setting in settingsEnum)
+            this.$set(globalStore.settings, setting, 0);
         window.globalStore.settings[settingsEnum.ITERATIONS] = 1000000;
         this.validateSettings();
+        window.eventBus.$on('redraw', this.validateSettings);
     },
     computed: {
         allDisabled() {
@@ -172,7 +175,8 @@ export default {
                 let end = globalStore.settings[tEnd.key];
                 let start = globalStore.settings[tStart.key];
                 let cool = Math.pow(start / end, -1 / val);
-                globalStore.settings[tCooling.key] = cool;
+                this.$set(globalStore.settings, tCooling.key, cool);
+                // globalStore.settings[tCooling.key] = cool;
             }
             let t = Math.floor(globalStore.settings[its.key] * globalStore.averageOpTime / 1000);
             this.$set(globalStore.stats, statsEnum.ESTIMATED_TIME, t);

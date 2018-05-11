@@ -35,17 +35,19 @@
 
 <script>
 export default {
-    data() {
-        return {
-            cars: []
+    computed: {
+        cars() {
+            if (![
+                stateEnum.SOLUTION_VIEW,
+                stateEnum.SOLVING,
+                stateEnum.PAUSED,
+                stateEnum.SOLUTION_SAVING
+            ].includes(window.globalStore.state))
+                return [];
+            if (window.globalStore.showOnlyBest)
+                return window.globalStore.bestCars;
+            return window.globalStore.currentCars;
         }
-    },
-    mounted() {
-        for (let i = 0; i < 12; ++i)
-            this.cars.push({
-                cargo: Math.floor(Math.random() * 10000),
-                distance: (Math.random() * 10000).toFixed(1)
-            });
     }
 }
 </script>

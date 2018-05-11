@@ -96,6 +96,7 @@ export default {
                 currentRoutes: [],
                 bestRoutes: [],
                 graph: [],
+                chart: [],
                 averageOpTime: 1 / 50,
                 tStartRecommended: 5000,
                 showOnlyBest: false
@@ -113,7 +114,7 @@ export default {
             if (newState)
                 this.store.state = newState;
             if (update) {
-                for (let arrName of ['cars', 'currentRoutes', 'bestRoutes', 'graph'])
+                for (let arrName of ['currentCars', 'bestCars', 'chart', 'currentRoutes', 'bestRoutes', 'graph'])
                     if (update.hasOwnProperty(arrName)) {
                         while (this.store[arrName].length > 0)
                             this.store[arrName].pop();
@@ -122,6 +123,8 @@ export default {
                     }
                 if (update.hasOwnProperty('averageOpTime'))
                     this.store.averageOpTime = update.averageOpTime;
+                if (update.hasOwnProperty('tStartRecommended'))
+                    this.store.tStartRecommended = update.tStartRecommended;
                 if (update.hasOwnProperty('stats'))
                     for (let stat in update.stats)
                         this.store.stats[stat] = update.stats[stat];

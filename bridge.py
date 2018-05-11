@@ -40,6 +40,12 @@ def load_problem():
             'problem': problem
         })
 
+def launch_solve(settings):
+    events.put({
+        'type': 'LAUNCH',
+        'settings': settings
+    })
+
 def run_browser():
     sys.excepthook = cef.ExceptHook
     cef.Initialize()
@@ -48,6 +54,7 @@ def run_browser():
 
     bindings = cef.JavascriptBindings(bindToFrames=False, bindToPopups=False)
     bindings.SetFunction('requestProblemLoading', load_problem)
+    bindings.SetFunction('requestLaunchSolve', launch_solve)
     browser.SetJavascriptBindings(bindings)
 
     cef.MessageLoop()

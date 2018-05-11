@@ -60,6 +60,10 @@ export default {
             }]
         }
     },
+    created() {
+        for (let stat in statsEnum)
+            this.$set(globalStore.stats, stat, '-');
+    },
     computed: {
         statsVals() {
             let res = JSON.parse(JSON.stringify(globalStore.stats));
