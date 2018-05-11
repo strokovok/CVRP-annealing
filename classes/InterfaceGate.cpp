@@ -43,19 +43,6 @@ public:
 			PyDict_SetItemString(event, "update", update);
 		call("sendAppEvent", PyTuple_Pack(1, event));
 	}
-
-	// static void update_chart(ChartData *chart) {
-	// 	auto state = PyGILState_Ensure();
-	// 	vector <pair <ll, ll> > data = chart->get_points();
-	// 	PyObject *points = PyTuple_New(data.size());
-	// 	for (int i = 0; i < data.size(); ++i) {
-	// 		PyObject *x = PyLong_FromLong(data[i].first);
-	// 		PyObject *y = PyLong_FromLong(data[i].second);
-	// 		PyTuple_SET_ITEM(points, i, PyTuple_Pack(2, x, y));
-	// 	}
-	// 	execjs("updateChart", points);
-	// 	PyGILState_Release(state);
-	// }
 private:
 	InterfaceGate() {}
 

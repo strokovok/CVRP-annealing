@@ -14,9 +14,8 @@ struct Route {
 };
 
 class RouteSolution {
-private:
-	GraphData *graph;
 public:
+	GraphData *graph;
 	vector <Route*> routes;
 	double cost;
 

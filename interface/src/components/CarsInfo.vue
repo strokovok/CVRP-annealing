@@ -8,7 +8,7 @@
         <div class="labels" v-for="(car, i) in cars" :key="i">
             <div class="label">{{i}}</div>
             <div class="label">{{car.cargo}}</div>
-            <div class="label">{{car.distance}}</div>
+            <div class="label">{{Math.round(car.distance)}}</div>
         </div>
     </div>
 </template>

@@ -41,10 +41,22 @@ def load_problem():
         })
 
 def launch_solve(settings):
+    settings['T_START'] = float(settings['T_START'])
+    settings['T_END'] = float(settings['T_END'])
+    settings['T_COOLING'] = float(settings['T_COOLING'])
+    settings['ITERATIONS'] = int(settings['ITERATIONS'])
+    settings['TIME_LIMIT'] = int(settings['TIME_LIMIT'])
+    settings['MIN_ITERATION_DELAY'] = int(settings['MIN_ITERATION_DELAY'])
     events.put({
         'type': 'LAUNCH',
         'settings': settings
     })
+
+def pause_solve():
+    events.put({ 'type': 'PAUSE' })
+
+def stop_solve():
+    events.put({ 'type': 'STOP' })
 
 def run_browser():
     sys.excepthook = cef.ExceptHook
@@ -55,6 +67,8 @@ def run_browser():
     bindings = cef.JavascriptBindings(bindToFrames=False, bindToPopups=False)
     bindings.SetFunction('requestProblemLoading', load_problem)
     bindings.SetFunction('requestLaunchSolve', launch_solve)
+    bindings.SetFunction('requestPauseSolve', pause_solve)
+    bindings.SetFunction('requestStopSolve', stop_solve)
     browser.SetJavascriptBindings(bindings)
 
     cef.MessageLoop()

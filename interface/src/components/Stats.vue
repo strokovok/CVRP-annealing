@@ -88,6 +88,9 @@ export default {
                 stateEnum.PAUSED,
             ].includes(globalStore.state))
                 res[statsEnum.ESTIMATED_TIME] = "-";
+            for (let key in res)
+                if (!isNaN(res[key]))
+                    res[key] = Math.round(parseFloat(res[key]) * 100) / 100;
             return res;
         }
     }

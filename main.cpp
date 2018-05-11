@@ -8,6 +8,7 @@
 #include "classes/GraphData.cpp"
 #include "classes/RouteSolution.cpp"
 #include "classes/ChartData.cpp"
+#include "classes/AnnealingSolver.cpp"
 #include "classes/InterfaceGate.cpp"
 #ifdef _WIN32
     #include <windows.h>
@@ -33,10 +34,11 @@ void cpsleep(int m) {
 int main() {
 	srand(time(0));
 	InterfaceGate::init();
-	GraphData *graph;
-	ChartData *chart;
+	GraphData *graph = nullptr;
+	AnnealingSolver *solver = nullptr;
 	State state = Waiting;
-	int iteration_delay = 0;
+
+	ll iteration_delay = 0;
 	AdvancedTimer syncTimer, iterationTimer, updateTimer;
 	syncTimer.run();
 	while (true) {
@@ -53,6 +55,8 @@ int main() {
 			while ((event = InterfaceGate::extract_event()) != Py_None) {
 				string event_type(PyUnicode_AsUTF8(PyDict_GetItemString(event, "type")));
 				if (event_type == "PROBLEM_LOADING") {
+					if (graph != nullptr)
+						delete graph;
 					graph = new GraphData(PyDict_GetItemString(event, "problem"));
 					AdvancedTimer opTimer;
 					opTimer.run();
@@ -72,6 +76,35 @@ int main() {
 					InterfaceGate::sendAppEvent("PROBLEM_READY", update);
 					state = Ready;
 				}
+				if (event_type == "LAUNCH") {
+					if (state == Paused)
+						solver->unpause();
+					else {
+						PyObject *settings = PyDict_GetItemString(event, "settings");
+						PyObject *delay = PyDict_GetItemString(settings, "MIN_ITERATION_DELAY");
+						iteration_delay = PyLong_AsLongLong(delay);
+						if (solver != nullptr)
+							delete solver;
+						solver = new AnnealingSolver(graph, settings);
+					}
+					state = Solving;
+					iterationTimer.run();
+					updateTimer.run();
+				}
+				if (event_type == "PAUSE" || event_type == "STOP") {
+					iterationTimer.clear();
+					updateTimer.clear();
+					iterationTimeLeft = updateTimeLeft = 1e18;
+				}
+				if (event_type == "PAUSE") {
+					solver->pause();
+					state = Paused;
+				}
+				if (event_type == "STOP") {
+					delete solver;
+					solver = nullptr;
+					state = Ready;
+				}
 			}
 			InterfaceGate::pyunlock();
 			syncTimer.clear();
@@ -79,13 +112,26 @@ int main() {
 		}
 
 		if (iterationTimeLeft <= timeLeft) {
-			// Iteration
 			iterationTimer.clear();
-			iterationTimer.run();
+			if (solver->isFinished()) {
+				InterfaceGate::pylock();
+				InterfaceGate::sendAppEvent("SOLUTION_VIEW", solver->makeUpdate());
+				InterfaceGate::pyunlock();
+				delete solver;
+				solver = nullptr;
+				state = Ready;
+				updateTimer.clear();
+				updateTimeLeft = 1e18;
+			} else {
+				solver->runIteration();
+				iterationTimer.run();
+			}
 		}
 
 		if (updateTimeLeft <= timeLeft) {
-			// Update
+			InterfaceGate::pylock();
+			InterfaceGate::sendAppEvent("", solver->makeUpdate());
+			InterfaceGate::pyunlock();
 			updateTimer.clear();
 			updateTimer.run();
 		}
