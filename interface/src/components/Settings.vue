@@ -145,7 +145,7 @@ export default {
             if (its.auto && (tStart.auto || tEnd.auto || tCooling.auto))
                 globalStore.settings[its.key] = 1000000;
             if (tEnd.auto && (tStart.auto || tCooling.auto))
-                globalStore.settings[tEnd.key] = 0.1;
+                globalStore.settings[tEnd.key] = 0.05;
             if (tStart.auto && tCooling.auto)
                 globalStore.settings[tStart.key] = globalStore.tStartRecommended;
 
@@ -191,7 +191,7 @@ export default {
         },
         validateSettings() {
             this.validateSetting(settingsEnum.T_START, 10, 1e10, globalStore.tStartRecommended);
-            this.validateSetting(settingsEnum.T_END, 0.1, globalStore.settings[settingsEnum.T_START] - 1, 0.1);
+            this.validateSetting(settingsEnum.T_END, 0.01, globalStore.settings[settingsEnum.T_START] - 1, 0.05);
             this.validateSetting(settingsEnum.T_COOLING, 0.1, 0.9999, 0.9998);
             this.validateSetting(settingsEnum.ITERATIONS, 1, 1000000000000, 1000000);
             this.validateSetting(settingsEnum.TIME_LIMIT, 3, 1000000000000, 60);

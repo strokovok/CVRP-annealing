@@ -56,7 +56,8 @@ public:
 				delete bestSolution;
 				bestSolution = currentSolution;
 			}
-		}
+		} else
+			delete newSolution;
 		t *= factor;
 		++iterationsCnt;
 		chart->add_node(timer.value(), currentSolution->cost);

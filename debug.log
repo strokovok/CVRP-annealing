@@ -118,3 +118,8 @@
 [0511/060850.963:ERROR:CONSOLE(5248)] "SyntaxError: Unexpected token S in JSON at position 1473798", source: chrome-devtools://devtools/inspector.js (5248)
 [0511/060940.744:ERROR:CONSOLE(0)] "Uncaught (in promise) SecurityError: It was determined that certain files are unsafe for access within a Web application, or that too many calls are being made on file resources.", source: chrome-devtools://devtools/inspector.html (0)
 [0511/060941.677:ERROR:CONSOLE(5248)] "SyntaxError: Unexpected token S in JSON at position 1473798", source: chrome-devtools://devtools/inspector.js (5248)
+[0511/061414.527:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0511/061731.488:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0511/062025.403:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0511/062214.948:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
+[0511/062737.842:ERROR:child_thread_impl.cc(762)] Request for unknown Channel-associated interface: ui::mojom::GpuMain
