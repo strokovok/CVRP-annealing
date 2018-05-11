@@ -58,6 +58,7 @@ export default {
             return [
                 stateEnum.PROBLEM_READY,
                 stateEnum.SOLUTION_VIEW,
+                stateEnum.PAUSED,
                 stateEnum.INCORRECT_SOLUTION
             ].includes(globalStore.state);
         },

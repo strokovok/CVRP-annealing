@@ -37,7 +37,7 @@ public:
 	}
 
 	RouteSolution(RouteSolution *prev): graph(prev->graph) {
-		int change = min(1 + rand() % 10, graph->n - 1);
+		int change = min(1 + rand() % 7, graph->n - 1);
 		vector <int> filter;
 		for (int i = 1; i < graph->n; ++i)
 			filter.push_back(i);

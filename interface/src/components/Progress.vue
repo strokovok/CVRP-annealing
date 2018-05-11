@@ -44,7 +44,7 @@ export default {
                 return 'Готово!';
             if (globalStore.state === stateEnum.SOLVING)
                 return `Выполняется (${this.progress}%)`;
-            return `Пауза (${this.progress})`;
+            return `Пауза (${this.progress}%)`;
         }
     }
 }

@@ -44,7 +44,7 @@ export default {
             }, {
                 label: 'Времени прошло',
                 key: statsEnum.TIME_PASSED,
-                prefix: ''
+                prefix: 'с'
             }, {
                 label: 'Итерации',
                 key: statsEnum.ITERATIONS,
