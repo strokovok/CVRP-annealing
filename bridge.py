@@ -68,6 +68,21 @@ def load_problem():
             'problem': problem
         })
 
+def save_solution(solution):
+    app = wx.App(None)
+    dialog = wx.FileDialog(None, 'Save', style=(wx.FD_SAVE))
+    if dialog.ShowModal() != wx.ID_OK:
+        return
+    path = dialog.GetPath()
+    dialog.Destroy()
+    f = open(path, 'w')
+    num = 0
+    for route in solution['routes']:
+        num += 1
+        f.write('Route #{}: '.format(num) + ' '.join(list(map(str, route))) + '\n')
+    f.write('cost {}'.format(int(solution['cost'])))
+    f.close()
+
 def launch_solve(settings):
     settings['T_START'] = float(settings['T_START'])
     settings['T_END'] = float(settings['T_END'])
@@ -95,6 +110,7 @@ def run_browser():
     bindings = cef.JavascriptBindings(bindToFrames=False, bindToPopups=False)
     bindings.SetFunction('requestProblemLoading', load_problem)
     bindings.SetFunction('requestSolutionLoading', load_solution)
+    bindings.SetFunction('requestSolutionSaving', save_solution)
     bindings.SetFunction('requestLaunchSolve', launch_solve)
     bindings.SetFunction('requestPauseSolve', pause_solve)
     bindings.SetFunction('requestStopSolve', stop_solve)

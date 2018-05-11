@@ -92,3 +92,24 @@ NameError: name 'graph' is not defined
     graph: problem['v']
 NameError: name 'graph' is not defined
 
+
+[2018-05-11 09:43:00] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 81, in save_solution
+    f.write('Route #{}: '.format(num) + ' '.join(route) + '\n')
+TypeError: sequence item 0: expected str instance, int found
+
+
+[2018-05-11 09:45:39] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 83, in save_solution
+    f.write('Route #{}: '.format(num) + ' '.join(route) + '\n')
+TypeError: sequence item 0: expected str instance, int found
+
+
+[2018-05-11 09:47:13] Traceback (most recent call last):
+  File "v8function_handler.pyx", line 42, in cefpython_py36.V8FunctionHandler_Execute (cefpython_py36.cpp:97829)
+  File "C:\Users\strok\Desktop\CVRP\bridge.py", line 83, in save_solution
+    print('Route #{}: '.format(num) + ' '.join(route) + '\n')
+TypeError: sequence item 0: expected str instance, int found
+

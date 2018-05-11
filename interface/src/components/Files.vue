@@ -44,7 +44,10 @@ export default {
         },
         saveSolution() {
             if (window.requestSolutionSaving)
-                window.requestSolutionSaving();
+                window.requestSolutionSaving({
+                    'routes': globalStore.bestRoutes,
+                    'cost': globalStore.stats[statsEnum.BEST_RESULT]
+                });
         },
         resetSolution() {
             window.handleAppEvent({ newState: stateEnum.PROBLEM_READY });
