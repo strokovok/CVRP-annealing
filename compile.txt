@@ -1,0 +1,5 @@
+{   
+    "cmd": ["mingw32-g++.exe", "-std=c++0x", "-Ofast", "-march=native", "-o", "$file_base_name", "$file",
+        "-IC:/Soft/Python36/include", "-LC:/Soft/Python36/libs", "-lpython36", "-D_hypot=hypot"],
+    "name": "Python"
+},

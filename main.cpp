@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
+#include <Python.h>
 #include "classes/AdvancedTimer.cpp"
 #include "classes/GraphData.cpp"
 #include "classes/RouteSolution.cpp"
@@ -32,6 +33,10 @@ void cpsleep(int m) {
 }
 
 int main() {
+	#ifdef _WIN32
+		ShowWindow(GetConsoleWindow(), SW_HIDE);
+	#endif
+
 	srand(time(0));
 	InterfaceGate::init();
 	GraphData *graph = nullptr;
@@ -104,6 +109,10 @@ int main() {
 					delete solver;
 					solver = nullptr;
 					state = Ready;
+				}
+				if (event_type == "CLOSE") {
+					Py_Finalize();
+					exit(0);
 				}
 			}
 			InterfaceGate::pyunlock();

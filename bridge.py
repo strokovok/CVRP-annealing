@@ -101,11 +101,16 @@ def pause_solve():
 def stop_solve():
     events.put({ 'type': 'STOP' })
 
+class CloseHandler(object):
+    def OnBeforeClose(self, browser):
+        events.put({ 'type': 'CLOSE' })
+
 def run_browser():
     sys.excepthook = cef.ExceptHook
-    cef.Initialize()
+    cef.Initialize({ 'context_menu': { 'enabled': False } })
     global browser
     browser = cef.CreateBrowserSync(url="file:///interface/dist/index.html", window_title="CVRP")
+    browser.SetClientHandler(CloseHandler())
 
     bindings = cef.JavascriptBindings(bindToFrames=False, bindToPopups=False)
     bindings.SetFunction('requestProblemLoading', load_problem)
