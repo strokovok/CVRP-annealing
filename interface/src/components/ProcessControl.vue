@@ -32,7 +32,10 @@ export default {
                         bestRoutes: [],
                         currentCars: [],
                         bestCars: [],
-                        chart: []
+                        chart: [],
+                        stats: {
+                            [statsEnum.PROGRESS]: 0
+                        }
                     }});
                 window.requestLaunchSolve(window.globalStore.settings);
             }

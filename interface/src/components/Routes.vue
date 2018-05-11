@@ -115,6 +115,7 @@ export default {
                         left: `${x}px`,
                         background: routeColors[color]
                     };
+                    this.vertexes[0].style = { display: 'none' };
                     if (col === V_IN_ROW) {
                         col = 1;
                         x = 0;

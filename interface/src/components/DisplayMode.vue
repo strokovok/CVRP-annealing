@@ -18,6 +18,7 @@ export default {
     methods: {
         toggle() {
             window.globalStore.showOnlyBest = !window.globalStore.showOnlyBest;
+            eventBus.$emit('redraw');
         }
     },
     computed: {
