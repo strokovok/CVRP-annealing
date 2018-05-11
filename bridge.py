@@ -5,6 +5,7 @@ import wx
 from pyutils.parseproblem import parseproblem
 from pyutils.parsesolution import parsesolution
 import queue
+wx.DisableAsserts()
 
 if not hasattr(sys, 'argv'):
     sys.argv  = ['']
