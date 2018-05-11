@@ -3,6 +3,7 @@ import threading
 import sys
 import wx
 from pyutils.parseproblem import parseproblem
+from pyutils.parsesolution import parsesolution
 import queue
 
 if not hasattr(sys, 'argv'):
@@ -16,6 +17,32 @@ problem = None
 def extract_event():
     last_event = None if events.empty() else events.get()
     return last_event
+
+def load_solution():
+    app = wx.App(None)
+    dialog = wx.FileDialog(None, 'Open', style=(wx.FD_OPEN | wx.FD_FILE_MUST_EXIST))
+    if dialog.ShowModal() != wx.ID_OK:
+        return
+    sendAppEvent({'newState': 'SOLUTION_LOADING'})
+    path = dialog.GetPath()
+    dialog.Destroy()
+    global problem
+    solution = parsesolution(path, problem)
+    if solution is None:
+        sendAppEvent({'newState': 'INCORRECT_SOLUTION'})
+    else:
+        sendAppEvent({
+            'newState': 'SOLUTION_VIEW',
+            'update': {
+                'stats': {
+                    'BEST_RESULT': solution['cost'],
+                },
+                'currentCars': solution['cars'],
+                'bestCars': solution['cars'],
+                'currentRoutes': solution['routes'],
+                'bestRoutes': solution['routes']
+            }
+        })
 
 def load_problem():
     app = wx.App(None)
@@ -32,7 +59,8 @@ def load_problem():
         sendAppEvent({
             'newState': 'PROBLEM_LOADING',
             'update': {
-                'graph': problem['v']
+                'graph': problem['v'],
+                'file': path.split('\\')[-1]
             }
         })
         events.put({
@@ -66,6 +94,7 @@ def run_browser():
 
     bindings = cef.JavascriptBindings(bindToFrames=False, bindToPopups=False)
     bindings.SetFunction('requestProblemLoading', load_problem)
+    bindings.SetFunction('requestSolutionLoading', load_solution)
     bindings.SetFunction('requestLaunchSolve', launch_solve)
     bindings.SetFunction('requestPauseSolve', pause_solve)
     bindings.SetFunction('requestStopSolve', stop_solve)

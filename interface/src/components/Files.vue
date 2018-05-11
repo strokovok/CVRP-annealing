@@ -1,6 +1,6 @@
 <template>
     <div class="files">
-        <div class="ui-label">{{status}}</div>
+        <div class="ui-label">{{status}}{{file}}</div>
         <div class="buttons">
             <button class="ui-button" :disabled="!problemLoadAbility" @click="loadProblem">
                 Загрузить задачу
@@ -51,7 +51,10 @@ export default {
         }
     },
     computed: {
-       status() {
+        file() {
+            return globalStore.file === "" ? "" : ` (${globalStore.file})`;
+        },
+        status() {
            return {
                [stateEnum.EMPTY]: 'Загрузите задачу',
                [stateEnum.PROBLEM_LOADING]: 'Проверка задачи',

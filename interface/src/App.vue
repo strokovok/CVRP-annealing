@@ -99,7 +99,8 @@ export default {
                 chart: [],
                 averageOpTime: 1 / 50,
                 tStartRecommended: 5000,
-                showOnlyBest: false
+                showOnlyBest: false,
+                file: ""
             }
         }
     },
@@ -121,6 +122,8 @@ export default {
                         for (let item of update[arrName])
                             this.store[arrName].push(item);
                     }
+                if (update.hasOwnProperty('file'))
+                    this.store.file = update.file;
                 if (update.hasOwnProperty('averageOpTime'))
                     this.store.averageOpTime = update.averageOpTime;
                 if (update.hasOwnProperty('tStartRecommended'))
