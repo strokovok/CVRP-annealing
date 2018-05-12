@@ -37,6 +37,8 @@ int main() {
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 	#endif
 
+	// Py_SetPythonHome(L"./Python36/");
+
 	srand(time(0));
 	InterfaceGate::init();
 	GraphData *graph = nullptr;

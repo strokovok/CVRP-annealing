@@ -36,12 +36,8 @@ public:
 	}
 
 	ll value() {
-		if (active) {
-			tp moment = now();
-			duration += dist(last_point, moment);
-			last_point = moment;
-		}
-		return duration;
+		ll delta = (active) ? dist(last_point, now()) : 0;
+		return duration + delta;
 	}
 
 	void clear() {
