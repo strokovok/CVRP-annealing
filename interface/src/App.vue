@@ -25,6 +25,13 @@
 
 <style lang="scss" scoped>
     .page {
+        transform-origin: 50% 0;
+        @media (max-width: 770px) {
+            transform: scale(0.8);
+        }
+        @media (max-width: 620px) {
+            transform: scale(0.7);
+        }
         margin: 5px 0;
         width: 100%;
         display: flex;
